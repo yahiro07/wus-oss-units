@@ -1,0 +1,449 @@
+html {
+  font-size: 10px;
+  font-family: 'Fredoka One', cursive;
+  line-height: 1;
+  color: #2c2c2c;
+  background: #e5e5e5;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content__inner {
+  position: relative;
+  padding: 24px;
+  width: 727px;
+  height: 562px;
+  background: #fff;
+  border: 4px solid #c0c0c0;
+  border-top: none;
+  border-radius: 8px;
+  box-shadow: 0 16px 0 16px #d3d3d3;
+}
+
+.initializeButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 16px;
+  font-size: 48px;
+  color: #2c2c2c;
+  background: #e5e5e5;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 8px 0 0 #d3d3d3;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  display: none;
+}
+
+.initializeButton.--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.uiWrapper {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.uiWrapper.--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.knob--shortMargin {
+  margin-left: 8px;
+}
+
+.knob__label {
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.radioButton {
+  display: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.radioButton__label {
+  position: relative;
+  display: flex;
+  padding-left: 12px;
+}
+
+.radioButton__label::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  background: #2c2c2c;
+  border-radius: 50%;
+}
+
+.radioButton:checked+.radioButton__label::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #00bfff;
+  border: 2px solid #2c2c2c;
+  border-radius: 50%;
+  box-shadow: 0 0 4px 0 #00bfff;
+}
+
+.masterControl {
+  padding-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #c0c0c0;
+}
+
+.masterControl__ui {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bankWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bankInner {
+  display: flex;
+  margin-top: 8px;
+}
+
+.bank {
+  display: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.bank__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  border: 2px solid #c0c0c0;
+  border-radius: 4px;
+}
+
+.bank__label:hover {
+  opacity: 0.6;
+}
+
+.bank:checked+.bank__label {
+  color: #fff;
+  background: #00bfff;
+}
+
+.bank.--reserve+.bank__label {
+  color: #2c2c2c;
+  background: #c0c0c0;
+}
+
+.bank__label:not(:first-of-type) {
+  margin-left: 4px;
+}
+
+.bank__clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  margin-left: 4px;
+  background: #c0c0c0;
+  border: none;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.bank__clearButton:hover {
+  opacity: 0.6;
+}
+
+.player {
+  display: flex;
+  margin-left: 16px;
+}
+
+.player__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #e5e5e5;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 0 0 #d3d3d3;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.player__button:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.player__button:not(:first-child) {
+  margin-left: 16px;
+}
+
+.config {
+  display: flex;
+  align-items: flex-end;
+}
+
+.bpm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.bpm__input {
+  height: 40px;
+  padding: 8px;
+  font-size: 24px;
+  border: 2px solid #c0c0c0;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.bpm__label {
+  margin-top: 4px;
+}
+
+.masterVolume {
+  margin-left: 16px;
+}
+
+.synthControl {
+  display: flex;
+  padding-bottom: 8px;
+  margin-top: 8px;
+  border-bottom: 2px solid #c0c0c0;
+}
+
+.synthControl__heading {
+  padding-top: 4px;
+  font-size: 12px;
+  color: #fff;
+  background: #2c2c2c;
+  border-radius: 2px;
+  writing-mode: vertical-rl;
+}
+
+.synthControl__osc {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.synthControl__waveformSelect {
+  display: flex;
+  align-items: center;
+}
+
+.synthControl__sub {
+  display: flex;
+  padding-left: 8px;
+  margin-left: 16px;
+  border-left: 2px solid #c0c0c0;
+}
+
+.synthControl__filterType {
+  margin-left: 8px;
+}
+
+.synthControl__filterTypeSelect {
+  display: flex;
+  align-items: center;
+}
+
+.synthControl__dj {
+  margin-left: 8px;
+  padding-left: 8px;
+  display: flex;
+  border-left: 2px solid #c0c0c0;
+}
+
+.synthControl__dj .synthControl__filterType {
+  margin-left: 0;
+}
+
+.sequencer {
+  margin-top: 8px;
+}
+
+.sequencer__heading {
+  padding-left: 4px;
+  font-size: 12px;
+  color: #fff;
+  background: #2c2c2c;
+  border-radius: 2px;
+}
+
+.sequencer__subHeading {
+  padding: 4px 0;
+  font-size: 10px;
+  color: #fff;
+  background: #2c2c2c;
+  border-radius: 2px;
+  writing-mode: vertical-rl;
+}
+
+.sequencer__partToggle {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sequencer__partToggle.--inactive {
+  color: #2c2c2c;
+  background: #c0c0c0;
+}
+
+.sequencer__partToggle:hover {
+  opacity: 0.6;
+}
+
+.sequencer__noteSelectWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.sequencer__noteSelect {
+  width: 37px;
+  height: 37px;
+  padding: 4px;
+  margin-left: 4px;
+  font-size: 12px;
+  color: #2c2c2c;
+  background: #fff;
+  border: 2px solid #c0c0c0;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sequencer__noteSelect:hover {
+  opacity: 0.6;
+}
+
+.sequencer__noteGainInputWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.sequencer__noteGainInput {
+  display: flex;
+  justify-content: center;
+  width: 37px;
+  margin-left: 4px;
+}
+
+.sequencer__patternSelectWrapper {
+  display: flex;
+  margin-top: 8px;
+}
+
+.sequencer__patternSelect {
+  position: relative;
+  margin-left: 4px;
+  width: 37px;
+  height: 37px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sequencer__patternSelect:checked::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: block;
+  width: 21px;
+  height: 21px;
+  background: #00bfff;
+  border-radius: 4px;
+}
+
+.sequencer__patternSelect:hover {
+  opacity: 0.6;
+}
+
+.currentNoteWrapper {
+  display: flex;
+  padding-left: 15px;
+  margin-top: 16px;
+}
+
+.currentNote {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  width: 37px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.currentNote::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #2c2c2c;
+  border-radius: 50%;
+}
+
+.currentNote.--active::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #00bfff;
+  border: 2px solid #2c2c2c;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 0 #00bfff;
+}
