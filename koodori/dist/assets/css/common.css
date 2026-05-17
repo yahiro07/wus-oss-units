@@ -42,6 +42,7 @@ html {
   transition: opacity 0.2s, visibility 0.2s;
   appearance: none;
   -webkit-appearance: none;
+  display: none;
 }
 
 .initializeButton.--active {
@@ -50,8 +51,8 @@ html {
 }
 
 .uiWrapper {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   transition: opacity 0.2s, visibility 0.2s;
 }
 

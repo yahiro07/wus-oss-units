@@ -1,8 +1,6 @@
 import { Waveform, PitchName, SynthOption, Filter } from './types';
 import store from './store';
 import {
-  initializeButton,
-  uiWrapper,
   bankSelects,
   bankClearButton,
   startButton,
@@ -276,26 +274,24 @@ const initializeWorker = () => {
   worker.postMessage({ interval: lookahead });
 };
 
-// 以下、ユーザー操作時に発火する関数
-
-/**
- * 初期化ボタン
- * note: Web Audio APIの利用時は、「はじめる」ボタン等を用いて
- * ユーザーが再生を許可してから初期化を行うのが望ましい。
- * see: https://developer.mozilla.org/ja/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
- */
-const handleInitialize = async () => {
-  const activeClass = '--active';
+const ensureInitialized = async () => {
+  if (store.initialized) return;
   initializeAudio();
   await initializeSamples();
   initializeEffect();
   initializeRouting();
   initializeWorker();
   store.initialized = true;
-  initializeButton?.classList.remove(activeClass);
-  uiWrapper?.classList.add(activeClass);
   refreshDom();
 };
+
+const resumeAudioContext = async () => {
+  if (audioCtx.state === 'suspended') {
+    await audioCtx.resume();
+  }
+};
+
+// 以下、ユーザー操作時に発火する関数
 
 // TODO: 雑
 const handleChangeBank = (e: Event | number) => {
@@ -334,8 +330,10 @@ const handleClearBank = () => {
   refreshDom();
 };
 
-const handleStart = () => {
+const handleStart = async () => {
   if (store.playing) return;
+  await ensureInitialized();
+  await resumeAudioContext();
   store.currentNote = 0;
   store.nextNoteTime = audioCtx.currentTime;
   worker.postMessage('start');
@@ -343,6 +341,7 @@ const handleStart = () => {
 };
 
 const handleStop = () => {
+  if (!store.initialized) return;
   worker.postMessage('stop');
   store.playing = false;
   // 停止時にバンクボタンの予約がされている場合、移動して予約を解除
@@ -371,6 +370,8 @@ const handleChangeBpm = (e: Event) => {
   }
   store.bpm = value;
 
+  if (!store.initialized) return;
+
   // テンポシンクディレイを再設定する
   const secondsPerBeat = 60 / store.bpm;
   const noteTime = secondsPerBeat * 0.75;
@@ -385,6 +386,7 @@ const handleChangeMasterVolume = (e: Event) => {
     return;
   }
   store.masterVolume = value;
+  if (!store.initialized) return;
   masterGainNode.gain.value = store.masterVolume * 0.01;
 };
 
@@ -392,6 +394,7 @@ const handleChangeMasterFilterType = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
   const value = e.currentTarget.value as Filter;
   store.currentMasterFilter = value;
+  if (!store.initialized) return;
   masterFilterNode.type = store.currentMasterFilter;
 };
 
@@ -403,6 +406,7 @@ const handleChangeMasterFilterFrequency = (e: Event) => {
     return;
   }
   store.masterFilterFrequency = value;
+  if (!store.initialized) return;
   masterFilterNode.frequency.value = store.masterFilterFrequency;
 };
 
@@ -414,6 +418,7 @@ const handleChangeMasterFilterQ = (e: Event) => {
     return;
   }
   store.masterFilterQ = value;
+  if (!store.initialized) return;
   masterFilterNode.Q.value = store.masterFilterQ;
 };
 
@@ -425,6 +430,7 @@ const handleChangeDelayGain = (e: Event) => {
     return;
   }
   store.delayGain = value;
+  if (!store.initialized) return;
   delayGainNode.gain.value = store.delayGain * 0.01;
 };
 
@@ -436,6 +442,7 @@ const handleChangeReverbGain = (e: Event) => {
     return;
   }
   store.reverbGain = value;
+  if (!store.initialized) return;
   reverbGainNode.gain.value = store.reverbGain * 0.01;
 };
 
@@ -453,6 +460,7 @@ const handleChangeFilterType = (e: Event) => {
   if (!(e.currentTarget instanceof HTMLInputElement)) return;
   const value = e.currentTarget.value as Filter;
   store.currentFilter = value;
+  if (!store.initialized) return;
   synthFilterNode.type = store.currentFilter;
 };
 
@@ -464,6 +472,7 @@ const handleChangeFilterFrequency = (e: Event) => {
     return;
   }
   store.filterFrequency = value;
+  if (!store.initialized) return;
   synthFilterNode.frequency.value = store.filterFrequency;
 };
 
@@ -475,6 +484,7 @@ const handleChangeFilterQ = (e: Event) => {
     return;
   }
   store.filterQ = value;
+  if (!store.initialized) return;
   synthFilterNode.Q.value = store.filterQ;
 };
 
@@ -535,7 +545,7 @@ const handleKeyboardInput = (e: KeyboardEvent) => {
       if (store.playing) {
         handleStop();
       } else {
-        handleStart();
+        void handleStart();
       }
     }
     default:
@@ -544,12 +554,13 @@ const handleKeyboardInput = (e: KeyboardEvent) => {
 };
 
 // イベントに関数を割当
-initializeButton?.addEventListener('click', handleInitialize);
 bankSelects.forEach((bankSelect) => {
   bankSelect.addEventListener('change', handleChangeBank);
 });
 bankClearButton?.addEventListener('click', handleClearBank);
-startButton?.addEventListener('click', handleStart);
+startButton?.addEventListener('click', () => {
+  void handleStart();
+});
 stopButton?.addEventListener('click', handleStop);
 waveformSelects.forEach((waveformSelect) => {
   waveformSelect.addEventListener('change', handleChangeWaveform);
