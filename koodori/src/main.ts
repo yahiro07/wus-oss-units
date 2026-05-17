@@ -245,7 +245,7 @@ const initializeSamples = async () => {
  * オーディオ周りの初期化
  */
 const initializeAudio = () => {
-  audioCtx = hostInterface?.audioContext || new AudioContext();
+  audioCtx = hostInterface?.raw.audioContext || new AudioContext();
   masterGainNode = new GainNode(audioCtx, { gain: store.masterVolume * 0.01 });
 };
 
@@ -293,7 +293,7 @@ const initializeRouting = () => {
   reverbGainNode.connect(masterFilterNode);
   // 最終出力
   masterFilterNode.connect(masterGainNode);
-  masterGainNode.connect(audioCtx.destination);
+  masterGainNode.connect(hostInterface?.raw.outputNode ?? audioCtx.destination);
 };
 
 /**
@@ -668,9 +668,9 @@ refreshDom();
 
 hostInterface?.setupUnitAgent({
   type: 'instrument',
-  categoryHint: "drumMachine", 
+  categoryHint: "drumMachine",
   setPlayState(playing) {
-    if(playing){
+    if (playing) {
       void handleStart();
     } else {
       handleStop();
