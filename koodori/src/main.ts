@@ -301,7 +301,7 @@ const initializeRouting = () => {
  */
 const initializeWorker = () => {
   const lookahead = 25.0;
-  worker = new Worker('assets/js/audioworker.js');
+  worker = new Worker('assets/js/audioWorker.js');
   worker.onmessage = (e) => {
     if (e.data === 'tick') {
       scheduler();
