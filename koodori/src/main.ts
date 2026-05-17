@@ -662,7 +662,7 @@ hihatPatternSelects.forEach((hihatPatternSelect, index) => {
 partToggles.forEach((partToggle) => {
   partToggle.addEventListener('click', handleTogglePart);
 });
-document.addEventListener('keydown', handleKeyboardInput);
+// document.addEventListener('keydown', handleKeyboardInput);
 
 refreshDom();
 
