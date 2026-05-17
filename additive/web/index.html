@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additive — Harmonic Additive Synthesizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="accent-border-top"></div>
+    <canvas id="viz"></canvas>
+
+    <header>
+        <h1>ADDITIVE</h1>
+        <p class="subtitle">Harmonic Additive Synthesizer</p>
+    </header>
+
+    <main>
+        <div class="controls-panel">
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-symbol">&#x2726;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+
+            <div class="preset-row">
+                <label>Preset</label>
+                <select id="presetSelect" onchange="onPresetChange()"></select>
+            </div>
+
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-symbol">&#x2726;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+
+            <div class="harmonics-section">
+                <p class="harmonics-label">Harmonics</p>
+                <div class="harmonics-editor" id="harmonicsEditor"></div>
+            </div>
+
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-symbol">&#x2726;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+
+            <div class="keyboard-section">
+                <div class="keyboard" id="keyboard"></div>
+            </div>
+
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-symbol">&#x2726;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+
+            <div class="sliders-grid">
+                <div class="control-group">
+                    <label class="control-label">Attack</label>
+                    <input type="range" class="slider" id="attack" min="0" max="1000" value="25" oninput="updateAttack()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Decay</label>
+                    <input type="range" class="slider" id="decay" min="0" max="1000" value="100" oninput="updateDecay()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Sustain</label>
+                    <input type="range" class="slider" id="sustain" min="0" max="100" value="70" oninput="updateSustain()">
+                </div>
+            </div>
+
+            <div class="sliders-grid">
+                <div class="control-group">
+                    <label class="control-label">Release</label>
+                    <input type="range" class="slider" id="release" min="0" max="1000" value="125" oninput="updateRelease()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Reverb</label>
+                    <input type="range" class="slider" id="reverb" min="0" max="100" value="30" oninput="updateReverb()">
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Volume</label>
+                    <input type="range" class="slider" id="vol" min="0" max="100" value="50" oninput="updateVolume()">
+                </div>
+            </div>
+
+            <div class="ornament-line">
+                <span class="ornament-dot"></span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-symbol">&#x2726;</span>
+                <span class="ornament-rule"></span>
+                <span class="ornament-dot"></span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Harmonics synthesized in real time</p>
+    </footer>
+
+    <script src="synth-engine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
