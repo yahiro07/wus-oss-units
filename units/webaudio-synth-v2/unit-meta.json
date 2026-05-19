@@ -1,7 +1,0 @@
-{
-  "name": "webaudio-synth-v2",
-  "unitType": "instrument",
-  "category": "synthesizer",
-  "repositoryUrl": "https://github.com/aike/webaudiosynthv2",
-  "preferredSize": "700,400"
-}
