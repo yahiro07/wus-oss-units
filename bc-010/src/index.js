@@ -1,7 +1,7 @@
 // @flow
 import App from './App.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import FontFaceObserver from 'fontfaceobserver';
 
 const font = new FontFaceObserver('Cute Font');
@@ -15,5 +15,5 @@ font.load().then(function () {
 });
 
 if (root !== null) {
-  ReactDOM.render(<App />, root);
+  createRoot(root).render(<App />);
 }
