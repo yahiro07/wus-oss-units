@@ -1,12 +1,12 @@
 // @flow
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
-import Key from './../Key';
-import PropTypes from 'prop-types';
-import arrOfKeyObjects from './../../data/arrOfKeyObjects.json';
-import autoBind from 'react-autobind';
+import Key from "./../Key";
+import PropTypes from "prop-types";
+import arrOfKeyObjects from "./../../data/arrOfKeyObjects.json";
+import autoBind from "react-autobind";
 
 const BlackKeys = styled.section`
   display: flex;
@@ -50,13 +50,13 @@ type State = {
 };
 
 /** Filter the keys json data for just white keys */
-const whiteKeysArray: Array<Object> = arrOfKeyObjects.filter(key => {
-  return key.type === 'white';
+const whiteKeysArray: Array<Object> = arrOfKeyObjects.filter((key) => {
+  return key.type === "white";
 });
 
 /** Filter the keys json data for just black keys */
-const blackKeysArray: Array<Object> = arrOfKeyObjects.filter(key => {
-  return key.type === 'black';
+const blackKeysArray: Array<Object> = arrOfKeyObjects.filter((key) => {
+  return key.type === "black";
 });
 
 /** Holds all the white and black keys. Also holds the logic for registering
@@ -91,7 +91,7 @@ class Keyboard extends Component<Props, State> {
     numberToFind: number,
     arrayToSearch: Array<Object>,
   ): Object | void {
-    return arrayToSearch.find(keyObj => {
+    return arrayToSearch.find((keyObj) => {
       return keyObj.keyCode === numberToFind;
     });
   }
@@ -124,17 +124,17 @@ class Keyboard extends Component<Props, State> {
   /** Add the keypress event listener to the document once the component mounts. */
   componentDidMount() {
     // $FlowFixMe
-    document.addEventListener('keydown', this.keyboardLetterPress);
+    // document.addEventListener('keydown', this.keyboardLetterPress);
     // $FlowFixMe
-    document.addEventListener('keyup', this.keyUpHandler);
+    // document.addEventListener('keyup', this.keyUpHandler);
   }
 
   /** Remove keypress event listener after component unmounts to prevent
    potential errors and memory leaks. */
   componentWillUnmount() {
     // $FlowFixMe
-    document.removeEventListener('keydown', this.keyboardLetterPress);
-    document.removeEventListener('keyup', this.props.keyPressUp);
+    // document.removeEventListener('keydown', this.keyboardLetterPress);
+    // document.removeEventListener('keyup', this.props.keyPressUp);
   }
 
   render() {
@@ -164,7 +164,7 @@ class Keyboard extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   octave: state.octave.octave,
 });
 

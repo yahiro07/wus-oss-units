@@ -1,8 +1,8 @@
 // @flow
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import styled, { css } from 'styled-components';
-import { isMobile } from 'react-device-detect';
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import styled, { css } from "styled-components";
+import { isMobile } from "react-device-detect";
 
 const KeyContainer = styled.article`
   border: 2px solid ${({ theme }) => theme.primary};
@@ -77,7 +77,7 @@ function Key({
         {note}
         {displayOctave}
       </header>
-      <Letter>{letter}</Letter>
+      {/* <Letter>{letter}</Letter> */}
     </OuterLetterContainer>
   );
 
