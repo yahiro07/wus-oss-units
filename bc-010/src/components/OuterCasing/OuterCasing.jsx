@@ -50,7 +50,7 @@ type Props = {
 const toneAudioContext = Tone.getContext().rawContext;
 const wrappedDestinationNode = window.hostInterface
   ? createCrossRealmAudioBridgingNode(
-      window.hostInterface.raw.outputNode,
+      window.hostInterface.audioDestinationNode,
       toneAudioContext,
     )
   : undefined;

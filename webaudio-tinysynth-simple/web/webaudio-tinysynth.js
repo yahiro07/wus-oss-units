@@ -989,7 +989,7 @@
         [{ w: "n0", v: 0.5, t: 0.25, d: 0.4, r: 0.4 }],
       ],
       drummap1: [
-        /*35*/[
+        /*35*/ [
           {
             w: "triangle",
             t: 0,
@@ -1034,7 +1034,7 @@
           { w: "square", f: 1150, v: 0.34, t: 0, r: 0.03, h: 0.025, d: 0.03 },
           { g: 1, w: "n0", t: 0, f: 13, h: 0.025, d: 0.1, s: 1, r: 0.1, v: 1 },
         ],
-        /*40*/[
+        /*40*/ [
           { w: "triangle", f: 200, v: 1, d: 0.06, t: 0, r: 0.06 },
           { w: "n0", g: 1, t: 0, f: 400, v: 12, r: 0.02, d: 0.02 },
         ],
@@ -1066,7 +1066,7 @@
           { g: 1, w: "n0", v: 5, t: 0.5, h: 0.015, d: 0.005, r: 0.005 },
         ],
         [{ w: "n1", v: 0.25, f: 390, r: 0.03, t: 0, h: 0.005, d: 0.03 }],
-        /*45*/[
+        /*45*/ [
           {
             w: "triangle",
             f: 140,
@@ -1113,7 +1113,7 @@
           { w: "n1", v: 0.3, f: 1200, d: 0.2, r: 0.2, h: 0.05, t: 0 },
           { w: "n1", t: 0, v: 1, d: 0.1, r: 0.1, p: 1.2, f: 440 },
         ],
-        /*50*/[
+        /*50*/ [
           {
             w: "triangle",
             f: 220,
@@ -1140,7 +1140,7 @@
           { g: 1, w: "n0", v: 3.1, t: 0.152, d: 0.002, r: 0.002 },
         ],
         null,
-        /*55*/[
+        /*55*/ [
           { w: "n1", v: 0.3, f: 1200, d: 0.2, r: 0.2, h: 0.05, t: 0 },
           { w: "n1", t: 0, v: 1, d: 0.1, r: 0.1, p: 1.2, f: 440 },
         ],
@@ -1190,7 +1190,7 @@
         null,
         null,
         null,
-        /*80*/[
+        /*80*/ [
           { w: "sine", f: 1720, v: 0.3, d: 0.02, t: 0, r: 0.02 },
           { w: "square", g: 1, t: 0, f: 2876, v: 6, d: 0.2, s: 1, r: 0.2 },
         ],
@@ -1200,7 +1200,7 @@
         ],
       ],
       drummap0: [
-        /*35*/[
+        /*35*/ [
           { w: "triangle", t: 0, f: 110, v: 1, d: 0.05, h: 0.02, p: 0.1 },
         ],
         [
@@ -1218,51 +1218,51 @@
         [{ w: "n0", f: 392, v: 0.5, d: 0.01, p: 0, t: 0, r: 0.05 }],
         [{ w: "n0", f: 33, d: 0.05, t: 0 }],
         [{ w: "n0", f: 100, v: 0.7, d: 0.03, t: 0, r: 0.03, h: 0.02 }],
-        /*40*/[{ w: "n0", f: 44, v: 0.7, d: 0.02, p: 0.1, t: 0, h: 0.02 }],
+        /*40*/ [{ w: "n0", f: 44, v: 0.7, d: 0.02, p: 0.1, t: 0, h: 0.02 }],
         [{ w: "triangle", f: 240, v: 0.9, d: 0.1, h: 0.02, p: 0.1, t: 0 }],
         [{ w: "n0", f: 440, v: 0.2, r: 0.01, t: 0 }],
         [{ w: "triangle", f: 270, v: 0.9, d: 0.1, h: 0.02, p: 0.1, t: 0 }],
         [{ w: "n0", f: 440, v: 0.2, d: 0.04, r: 0.04, t: 0 }],
-        /*45*/[
+        /*45*/ [
           { w: "triangle", f: 300, v: 0.9, d: 0.1, h: 0.02, p: 0.1, t: 0 },
         ],
         [{ w: "n0", f: 440, v: 0.2, d: 0.1, r: 0.1, h: 0.02, t: 0 }],
         [{ w: "triangle", f: 320, v: 0.9, d: 0.1, h: 0.02, p: 0.1, t: 0 }],
         [{ w: "triangle", f: 360, v: 0.9, d: 0.1, h: 0.02, p: 0.1, t: 0 }],
         [{ w: "n0", f: 150, v: 0.2, d: 0.1, r: 0.1, h: 0.05, t: 0, p: 0.1 }],
-        /*50*/[
+        /*50*/ [
           { w: "triangle", f: 400, v: 0.9, d: 0.1, h: 0.02, p: 0.1, t: 0 },
         ],
         [{ w: "n0", f: 150, v: 0.2, d: 0.1, r: 0.01, h: 0.05, t: 0, p: 0.1 }],
         [{ w: "n0", f: 150, v: 0.2, d: 0.1, r: 0.01, h: 0.05, t: 0, p: 0.1 }],
         [{ w: "n0", f: 440, v: 0.3, d: 0.1, p: 0.9, t: 0, r: 0.1 }],
         [{ w: "n0", f: 200, v: 0.2, d: 0.05, p: 0.9, t: 0 }],
-        /*55*/[{ w: "n0", f: 440, v: 0.3, d: 0.12, p: 0.9, t: 0 }],
+        /*55*/ [{ w: "n0", f: 440, v: 0.3, d: 0.12, p: 0.9, t: 0 }],
         [{ w: "sine", f: 800, v: 0.4, d: 0.06, t: 0 }],
         [{ w: "n0", f: 150, v: 0.2, d: 0.1, r: 0.01, h: 0.05, t: 0, p: 0.1 }],
         [{ w: "n0", f: 33, v: 0.3, d: 0.2, p: 0.9, t: 0 }],
         [{ w: "n0", f: 300, v: 0.3, d: 0.14, p: 0.9, t: 0 }],
-        /*60*/[{ w: "sine", f: 200, d: 0.06, t: 0 }],
+        /*60*/ [{ w: "sine", f: 200, d: 0.06, t: 0 }],
         [{ w: "sine", f: 150, d: 0.06, t: 0 }],
         [{ w: "sine", f: 300, t: 0 }],
         [{ w: "sine", f: 300, d: 0.06, t: 0 }],
         [{ w: "sine", f: 250, d: 0.06, t: 0 }],
-        /*65*/[{ w: "square", f: 300, v: 0.3, d: 0.06, p: 0.8, t: 0 }],
+        /*65*/ [{ w: "square", f: 300, v: 0.3, d: 0.06, p: 0.8, t: 0 }],
         [{ w: "square", f: 260, v: 0.3, d: 0.06, p: 0.8, t: 0 }],
         [{ w: "sine", f: 850, v: 0.5, d: 0.07, t: 0 }],
         [{ w: "sine", f: 790, v: 0.5, d: 0.07, t: 0 }],
         [{ w: "n0", f: 440, v: 0.3, a: 0.05, t: 0 }],
-        /*70*/[{ w: "n0", f: 440, v: 0.3, a: 0.05, t: 0 }],
+        /*70*/ [{ w: "n0", f: 440, v: 0.3, a: 0.05, t: 0 }],
         [{ w: "triangle", f: 1800, v: 0.4, p: 0.9, t: 0, h: 0.03 }],
         [{ w: "triangle", f: 1800, v: 0.3, p: 0.9, t: 0, h: 0.13 }],
         [{ w: "n0", f: 330, v: 0.3, a: 0.02, t: 0, r: 0.01 }],
         [{ w: "n0", f: 330, v: 0.3, a: 0.02, t: 0, h: 0.04, r: 0.01 }],
-        /*75*/[{ w: "n0", f: 440, v: 0.3, t: 0 }],
+        /*75*/ [{ w: "n0", f: 440, v: 0.3, t: 0 }],
         [{ w: "sine", f: 800, t: 0 }],
         [{ w: "sine", f: 700, t: 0 }],
         [{ w: "n0", f: 330, v: 0.3, t: 0 }],
         [{ w: "n0", f: 330, v: 0.3, t: 0, h: 0.1, r: 0.01, p: 0.7 }],
-        /*80*/[{ w: "sine", t: 0, f: 1200, v: 0.3, r: 0.01 }],
+        /*80*/ [{ w: "sine", t: 0, f: 1200, v: 0.3, r: 0.01 }],
         [{ w: "sine", t: 0, f: 1200, v: 0.3, d: 0.2, r: 0.2 }],
       ],
       /*@@gui*/
@@ -1321,7 +1321,7 @@
           this.ctx.fillRect(0, 0, 300, 32);
           var row1 = 8,
             row2 = 20;
-          if (this.song) (row1 = 4), (row2 = 24);
+          if (this.song) ((row1 = 4), (row2 = 24));
           else {
             this.ctx.fillStyle = "#fff";
             this.ctx.fillText("TinySynth", 8, 20);
@@ -1554,7 +1554,7 @@
         this.tuningC = [];
         this.tuningF = [];
         this.scaleTuning = [];
-        (this.maxTick = 0), (this.playTick = 0), (this.playing = 0);
+        ((this.maxTick = 0), (this.playTick = 0), (this.playing = 0));
         this.releaseRatio = 3.5;
         for (let i = 0; i < 16; ++i) {
           this.pg[i] = 0;
@@ -1613,9 +1613,15 @@
         );
         if (this.debug) console.log("internalcontext:" + this.internalcontext);
         if (this.internalcontext) {
-          this.setAudioContext(
-            window.hostInterface?.audioContext ?? new AudioContext(),
-          );
+          const { hostInterface } = window;
+          if (hostInterface) {
+            this.setAudioContext(
+              hostInterface.audioContext,
+              hostInterface.audioDestinationNode,
+            );
+          } else {
+            this.setAudioContext(new AudioContext());
+          }
         }
         this.isReady = 1;
       },
@@ -1732,7 +1738,7 @@
         dummy.start(0);
         dummy.stop(this.actx.currentTime + 0.001);
         if (this.playTick >= this.maxTick)
-          (this.playTick = 0), (this.playIndex = 0);
+          ((this.playTick = 0), (this.playIndex = 0));
         this.playTime = this.actx.currentTime + 0.1;
         this.tick2Time = (4 * 60) / this.song.tempo / this.song.timebase;
         this.playing = 1;
@@ -1764,7 +1770,7 @@
         function Msg(song, tick, s, i) {
           var v = s[i];
           datalen = 1;
-          if ((v & 0x80) == 0) (v = runst), (datalen = 0);
+          if ((v & 0x80) == 0) ((v = runst), (datalen = 0));
           runst = v;
           switch (v & 0xf0) {
             case 0xc0:
@@ -1856,7 +1862,7 @@
             var tick = 0;
             var j = 0;
             this.notetab.length = 0;
-            for (; ;) {
+            for (;;) {
               tick += Delta(s, idx + 8 + j);
               j += datalen;
               var e = Msg(this.song, tick, s, idx + 8 + j);
@@ -1927,7 +1933,7 @@
           if (nt.o[k].detune) {
             try {
               this.chmod[nt.ch].disconnect(nt.o[k].detune);
-            } catch (e) { }
+            } catch (e) {}
           }
           nt.g[k].gain.value = 0;
         }
@@ -1964,28 +1970,28 @@
               (this.masterTuningF +
                 this.tuningF[ch] / 8192 +
                 this.scaleTuning[ch][n % 12])) /
-            12,
+              12,
           );
         this._limitVoices(ch, n);
         for (let i = 0; i < p.length; ++i) {
           pn = p[i];
           const dt = t + pn.a + pn.h;
           if (pn.g == 0)
-            (out = this.chvol[ch]),
+            ((out = this.chvol[ch]),
               (sc = (v * v) / 16384),
-              (fp[i] = f * pn.t + pn.f);
+              (fp[i] = f * pn.t + pn.f));
           else if (pn.g > 10)
-            (out = g[pn.g - 11].gain),
+            ((out = g[pn.g - 11].gain),
               (sc = 1),
-              (fp[i] = fp[pn.g - 11] * pn.t + pn.f);
+              (fp[i] = fp[pn.g - 11] * pn.t + pn.f));
           else if (o[pn.g - 1].frequency)
-            (out = o[pn.g - 1].frequency),
+            ((out = o[pn.g - 1].frequency),
               (sc = fp[pn.g - 1]),
-              (fp[i] = fp[pn.g - 1] * pn.t + pn.f);
+              (fp[i] = fp[pn.g - 1] * pn.t + pn.f));
           else
-            (out = o[pn.g - 1].playbackRate),
+            ((out = o[pn.g - 1].playbackRate),
               (sc = fp[pn.g - 1] / 440),
-              (fp[i] = fp[pn.g - 1] * pn.t + pn.f);
+              (fp[i] = fp[pn.g - 1] * pn.t + pn.f));
           switch (pn.w[0]) {
             case "n":
               o[i] = this.actx.createBufferSource();
@@ -2034,7 +2040,7 @@
             o[i].onended = () => {
               try {
                 if (o[i].detune) this.chmod[ch].disconnect(o[i].detune);
-              } catch (e) { }
+              } catch (e) {}
             };
             o[i].stop(t + p[0].d * this.releaseRatio);
           }

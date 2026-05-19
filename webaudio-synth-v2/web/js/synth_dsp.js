@@ -353,7 +353,9 @@ var WebSynth = function () {
   this.mixer.connect(this.filter.getnode());
   this.filter.connect(this.volume.getnode());
   this.volume.connect(this.delay.getnode());
-  this.delay.connect(this.context.destination);
+  this.delay.connect(
+    window.hostInterface?.audioDestinationNode ?? this.context.destination,
+  );
 
   this.mixer.onaudioprocess = function (event) {
     self.filter.set_eg(self.feg.gain);

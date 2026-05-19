@@ -51,7 +51,9 @@
 
     masterGain = audioCtx.createGain();
     masterGain.gain.value = parseFloat(masterInput.value);
-    masterGain.connect(audioCtx.destination);
+    masterGain.connect(
+      window.hostInterface?.audioDestinationNode ?? audioCtx.destination,
+    );
 
     scheduler = createScheduler(audioCtx, {
       bpm: parseInt(bpmInput.value, 10),

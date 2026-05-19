@@ -52,7 +52,6 @@ let hihatBuffer: AudioBuffer;
 let impulseBuffer: AudioBuffer;
 let worker: Worker;
 
-
 type PartType = 'synth' | 'kick' | 'snare' | 'hihat';
 
 const getPartEnabledStates = (partType: PartType) => {
@@ -73,8 +72,8 @@ const isPartEnabled = (partType: PartType) =>
 const scheduleNote = (time: number, synthOption: SynthOption) => {
   // シンセサイザー
   if (
-    store.synthEnabled[store.currentBank]
-    && store.synthPattern[store.currentBank][store.currentNote]
+    store.synthEnabled[store.currentBank] &&
+    store.synthPattern[store.currentBank][store.currentNote]
   ) {
     const { waveform, gain, pitchName, length } = synthOption;
     const oscNode = new OscillatorNode(audioCtx, { type: waveform });
@@ -88,8 +87,8 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
 
   // キック
   if (
-    store.kickEnabled[store.currentBank]
-    && store.kickPattern[store.currentBank][store.currentNote]
+    store.kickEnabled[store.currentBank] &&
+    store.kickPattern[store.currentBank][store.currentNote]
   ) {
     const kickNode = audioCtx.createBufferSource();
     kickNode.buffer = kickBuffer;
@@ -99,8 +98,8 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
 
   // スネア
   if (
-    store.snareEnabled[store.currentBank]
-    && store.snarePattern[store.currentBank][store.currentNote]
+    store.snareEnabled[store.currentBank] &&
+    store.snarePattern[store.currentBank][store.currentNote]
   ) {
     const snareNode = audioCtx.createBufferSource();
     snareNode.buffer = snareBuffer;
@@ -110,8 +109,8 @@ const scheduleNote = (time: number, synthOption: SynthOption) => {
 
   // ハイハット
   if (
-    store.hihatEnabled[store.currentBank]
-    && store.hihatPattern[store.currentBank][store.currentNote]
+    store.hihatEnabled[store.currentBank] &&
+    store.hihatPattern[store.currentBank][store.currentNote]
   ) {
     const hihatNode = audioCtx.createBufferSource();
     hihatNode.buffer = hihatBuffer;
@@ -245,7 +244,7 @@ const initializeSamples = async () => {
  * オーディオ周りの初期化
  */
 const initializeAudio = () => {
-  audioCtx = hostInterface?.raw.audioContext || new AudioContext();
+  audioCtx = hostInterface?.audioContext || new AudioContext();
   masterGainNode = new GainNode(audioCtx, { gain: store.masterVolume * 0.01 });
 };
 
@@ -293,7 +292,9 @@ const initializeRouting = () => {
   reverbGainNode.connect(masterFilterNode);
   // 最終出力
   masterFilterNode.connect(masterGainNode);
-  masterGainNode.connect(hostInterface?.raw.outputNode ?? audioCtx.destination);
+  masterGainNode.connect(
+    hostInterface?.audioDestinationNode ?? audioCtx.destination,
+  );
 };
 
 /**
@@ -668,7 +669,7 @@ refreshDom();
 
 hostInterface?.setupUnitAgent({
   type: 'instrument',
-  categoryHint: "drumMachine",
+  categoryHint: 'drumMachine',
   setPlayState(playing) {
     if (playing) {
       void handleStart();
@@ -676,4 +677,4 @@ hostInterface?.setupUnitAgent({
       handleStop();
     }
   },
-})
+});
