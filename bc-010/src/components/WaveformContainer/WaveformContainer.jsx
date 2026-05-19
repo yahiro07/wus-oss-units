@@ -41,8 +41,8 @@ const WaveformSelectionBttn = styled.div`
     cursor: pointer;
   }
 
-  ${({ isSelected }) =>
-    isSelected &&
+  ${({ $isSelected }) =>
+    $isSelected &&
     css`
       background-color: ${({ theme }) => theme.secondary};
       color: white;
@@ -68,10 +68,9 @@ function WaveformContainer({ oscType, toggleOscillators }: Props) {
         const isSelected = type === oscType;
         return (
           <WaveformSelectionBttn
-            isSelected={isSelected}
+            $isSelected={isSelected}
             key={`${id}-${type}`}
             onClick={() => toggleOscillators(type)}
-            type={type}
           >
             <Icon
               icon={type}

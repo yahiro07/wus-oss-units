@@ -41,20 +41,20 @@ const CloseButton = styled(FontAwesomeIcon)`
 const OuterContainer = styled.div`
   background-color: ${props => props.theme.background};
   border-left: 1px solid ${props => props.theme.primary};
-  box-shadow: ${({ isSideNavOpen }) =>
-    isSideNavOpen ? '-5px 0px 10px 1px rgba(1, 1, 1, 0.2)' : '0'};
+  box-shadow: ${({ $isSideNavOpen }) =>
+    $isSideNavOpen ? '-5px 0px 10px 1px rgba(1, 1, 1, 0.2)' : '0'};
   height: 100%;
   overflow-x: hidden;
-  opacity: ${({ isSideNavOpen }) => (isSideNavOpen ? '1' : '0')};
+  opacity: ${({ $isSideNavOpen }) => ($isSideNavOpen ? '1' : '0')};
   position: fixed;
   right: 0;
   top: 0;
   transition: 0.5s;
-  width: ${({ isSideNavOpen }) => (isSideNavOpen ? '30%' : '0')};
+  width: ${({ $isSideNavOpen }) => ($isSideNavOpen ? '30%' : '0')};
   z-index: 1;
 
   @media (max-width: 768px) {
-    width: ${({ isSideNavOpen }) => (isSideNavOpen ? '60%' : '0')};
+    width: ${({ $isSideNavOpen }) => ($isSideNavOpen ? '60%' : '0')};
   }
 `;
 
@@ -99,7 +99,7 @@ function SideNav({
   useOnClickOutside(sideNavRef, () => showSidenav(false));
 
   return (
-    <OuterContainer isSideNavOpen={isSideNavOpen} ref={sideNavRef}>
+    <OuterContainer $isSideNavOpen={isSideNavOpen} ref={sideNavRef}>
       <SideNavHeaderSection>
         <CloseButton hidden icon={faTimes} onClick={() => toggleSidenav()} />
         <SideNavTitle>MENU</SideNavTitle>

@@ -189,7 +189,8 @@ class VerticalSlider extends Component<Props, State> {
       <SliderHousing>
         <SliderContainer>
           <InputSlider
-            slider-name={sliderName}
+            aria-label={sliderName}
+            name={sliderName}
             type="range"
             min={min}
             max={max}

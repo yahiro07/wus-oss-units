@@ -11,8 +11,8 @@ const Chevron = styled(FontAwesomeIcon)`
   margin-right: 5px;
   transition: all 0.1s;
 
-  ${({ isopen }) =>
-    isopen === 'true' &&
+  ${({ $isOpen }) =>
+    $isOpen &&
     css`
       -webkit-transform: rotate(180deg);
       transform: rotate(180deg);
@@ -27,8 +27,8 @@ const ItemContainer = styled.div`
   overflow: hidden;
   transition: all 0.2s;
 
-  ${({ isopen }) =>
-    isopen === 'true' &&
+  ${({ $isOpen }) =>
+    $isOpen &&
     css`
       max-height: 2000px;
       opacity: 1;
@@ -60,8 +60,8 @@ const DropdownItem = styled.div`
     opacity: 0.8;
   }
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ $isActive }) =>
+    $isActive &&
     css`
       background-color: ${({ theme }) => theme.secondary};
       color: ${({ theme }) => theme.tertiary};
@@ -114,15 +114,15 @@ function SideNavDropdown({
     <>
       <Header onClick={() => setIsOpen(!isOpen)}>
         {name}
-        <Chevron icon={faChevronDown} isopen={isOpen.toString()} />
+        <Chevron icon={faChevronDown} $isOpen={isOpen} />
       </Header>
-      <ItemContainer isopen={isOpen.toString()}>
+      <ItemContainer $isOpen={isOpen}>
         {items.map((item, idx) => {
           const isActive = currentSelection(item);
           const itemName = getItemName(item);
           return (
             <DropdownItem
-              isActive={isActive}
+              $isActive={isActive}
               onClick={() => {
                 clickHandler(item);
               }}

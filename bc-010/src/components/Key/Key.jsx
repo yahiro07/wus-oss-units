@@ -15,8 +15,8 @@ const KeyContainer = styled.article`
     cursor: pointer;
   }
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ $isActive }) =>
+    $isActive &&
     css`
       background-color: ${({ theme }) => theme.quaternary} !important;
     `};
@@ -85,7 +85,7 @@ function Key({
     <Fragment>
       {isMobile ? (
         <KeyContainer
-          isActive={highlightKey === keyCode}
+          $isActive={highlightKey === keyCode}
           onTouchStart={() => keyPressDown(octaveNote)}
           onTouchEnd={() => keyPressUp(octaveNote)}
         >
@@ -93,7 +93,7 @@ function Key({
         </KeyContainer>
       ) : (
         <KeyContainer
-          isActive={highlightKey === keyCode}
+          $isActive={highlightKey === keyCode}
           onMouseDown={() => keyPressDown(octaveNote)}
           onMouseUp={() => keyPressUp(octaveNote)}
         >
