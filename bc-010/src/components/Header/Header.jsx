@@ -1,12 +1,24 @@
 // @flow
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { toggleSidenav } from './../SideNav/actions.js';
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
+import { toggleSidenav } from "./../SideNav/actions.js";
+import { changePreset } from "./../SideNav/actions.js";
+import { setOctave } from "./../OctaveContainer/actions.js";
+import { toggleOscillators } from "./../WaveformContainer/actions.js";
+import {
+  updateAllFilterEnvelopes,
+  updateAllSynthEnvelopes,
+} from "./../VerticalSlider/actions.js";
+import { applyPreset, getAdjacentPreset } from "./../../preset-utils.js";
 
 const HamburgerButton = styled(FontAwesomeIcon)`
   font-size: 2rem;
@@ -40,8 +52,11 @@ const HeaderContainer = styled.header`
 `;
 
 const PresetNameDisplay = styled.div`
+  align-items: center;
   color: ${({ theme }) => theme.tertiary};
+  display: flex;
   font-size: 2rem;
+  gap: 10px;
   letter-spacing: 3px;
   position: absolute;
   top: 50%;
@@ -52,6 +67,32 @@ const PresetNameDisplay = styled.div`
   @media (max-width: 768px) {
     font-size: 1rem;
   }
+`;
+
+const PresetNavButton = styled.button`
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.tertiary};
+  cursor: pointer;
+  display: flex;
+  font-size: 1.3rem;
+  justify-content: center;
+  padding: 0;
+  transition: opacity ${({ theme }) => theme.globalTransition};
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+`;
+
+const PresetLabel = styled.span`
+  min-width: 6em;
+  text-align: center;
 `;
 
 const SideNavButton = styled.div`
@@ -81,37 +122,89 @@ const SynthName = styled.h1`
   }
 `;
 
-function Header({ presetName, toggleSidenav }) {
+function Header({
+  presetId,
+  presetName,
+  toggleSidenav,
+  changePreset,
+  setOctave,
+  toggleOscillators,
+  updateAllSynthEnvelopes,
+  updateAllFilterEnvelopes,
+}) {
+  const handlePresetStep = (direction) => {
+    const nextPreset = getAdjacentPreset(presetId, direction);
+
+    applyPreset(nextPreset, {
+      updateAllSynthEnvelopes,
+      toggleOscillators,
+      setOctave,
+      updateAllFilterEnvelopes,
+      changePreset,
+    });
+  };
+
   return (
     <HeaderContainer>
       <SynthName>bc-010</SynthName>
-      <PresetNameDisplay>{presetName}</PresetNameDisplay>
+      <PresetNameDisplay>
+        <PresetNavButton
+          aria-label="Show previous preset"
+          onClick={() => handlePresetStep(-1)}
+          type="button"
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </PresetNavButton>
+        <PresetLabel>{presetName}</PresetLabel>
+        <PresetNavButton
+          aria-label="Show next preset"
+          onClick={() => handlePresetStep(1)}
+          type="button"
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </PresetNavButton>
+      </PresetNameDisplay>
       <SideNavButton onClick={() => toggleSidenav()}>MENU</SideNavButton>
       <HamburgerButton icon={faBars} onClick={() => toggleSidenav()} />
     </HeaderContainer>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
+  presetId: state.preset.id,
   presetName: state.preset.name,
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       toggleSidenav,
+      changePreset,
+      setOctave,
+      toggleOscillators,
+      updateAllSynthEnvelopes,
+      updateAllFilterEnvelopes,
     },
     dispatch,
   );
 
 Header.propTypes = {
+  /** Change the current synth preset. */
+  changePreset: PropTypes.func,
   /** Name of current synth preset. */
   presetName: PropTypes.string,
+  /** Id of current synth preset. */
+  presetId: PropTypes.string,
+  /** Set the synth octave. */
+  setOctave: PropTypes.func,
   /** Toggle the side nav bar. */
   toggleSidenav: PropTypes.func,
+  /** Toggle oscillator waveform. */
+  toggleOscillators: PropTypes.func,
+  /** Update filter params for the active preset. */
+  updateAllFilterEnvelopes: PropTypes.func,
+  /** Update synth envelope for the active preset. */
+  updateAllSynthEnvelopes: PropTypes.func,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

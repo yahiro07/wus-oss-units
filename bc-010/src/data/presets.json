@@ -1,5 +1,35 @@
 [
   {
+    "id": "0-rom",
+    "name": "init",
+    "octave": {
+      "octave": 5
+    },
+    "synthesizer": {
+      "oscillator": {
+        "type": "sawtooth"
+      },
+      "envelope": {
+        "attack": 0.0001,
+        "decay": 0.2,
+        "sustain": 0.2,
+        "release": 1
+      }
+    },
+    "filterParams": {
+      "frequency": 0,
+      "type": "sine",
+      "depth": 1,
+      "baseFrequency": 500,
+      "octaves": 2.6,
+      "filter": {
+        "type": "lowpass",
+        "rolloff": -12,
+        "Q": 1
+      }
+    }
+  },
+  {
     "id": "1-rom",
     "name": "chewy",
     "octave": {

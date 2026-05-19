@@ -1,60 +1,60 @@
 // @flow
-import React, { useRef } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import React, { useRef } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import {
   updateFilterEnvelope,
   updateSynthEnvelope,
   updateAllSynthEnvelopes,
   updateAllFilterEnvelopes,
-} from './../VerticalSlider/actions.js';
-import { setOctave } from './../OctaveContainer/actions.js';
-import { toggleOscillators } from './../WaveformContainer/actions.js';
+} from "./../VerticalSlider/actions.js";
+import { setOctave } from "./../OctaveContainer/actions.js";
+import { toggleOscillators } from "./../WaveformContainer/actions.js";
 import {
   changeTheme,
   changePreset,
   showSidenav,
   toggleSidenav,
-} from './actions.js';
-import presets from './../../data/presets.json';
-import useOnClickOutside from './../../hooks/useOnClickOutside.js';
-import Dropdown from './../SideNavDropdown';
+} from "./actions.js";
+import useOnClickOutside from "./../../hooks/useOnClickOutside.js";
+import Dropdown from "./../SideNavDropdown";
 
-import themeObj from './../../styles/theme.js';
+import themeObj from "./../../styles/theme.js";
+import { applyPreset, presets } from "./../../preset-utils.js";
 
 const CloseButton = styled(FontAwesomeIcon)`
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   padding: 0 2px;
   transition: all ${({ theme }) => theme.globalTransition};
-  visibility: ${({ hidden }) => (hidden ? 'hidden' : 'visible')};
+  visibility: ${({ hidden }) => (hidden ? "hidden" : "visible")};
   &:hover {
-    background-color: ${props => props.theme.quaternary};
-    color: ${props => props.theme.tertiary};
+    background-color: ${(props) => props.theme.quaternary};
+    color: ${(props) => props.theme.tertiary};
     cursor: pointer;
     opacity: 0.8;
   }
 `;
 
 const OuterContainer = styled.div`
-  background-color: ${props => props.theme.background};
-  border-left: 1px solid ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.background};
+  border-left: 1px solid ${(props) => props.theme.primary};
   box-shadow: ${({ $isSideNavOpen }) =>
-    $isSideNavOpen ? '-5px 0px 10px 1px rgba(1, 1, 1, 0.2)' : '0'};
+    $isSideNavOpen ? "-5px 0px 10px 1px rgba(1, 1, 1, 0.2)" : "0"};
   height: 100%;
   overflow-x: hidden;
-  opacity: ${({ $isSideNavOpen }) => ($isSideNavOpen ? '1' : '0')};
+  opacity: ${({ $isSideNavOpen }) => ($isSideNavOpen ? "1" : "0")};
   position: fixed;
   right: 0;
   top: 0;
   transition: 0.5s;
-  width: ${({ $isSideNavOpen }) => ($isSideNavOpen ? '30%' : '0')};
+  width: ${({ $isSideNavOpen }) => ($isSideNavOpen ? "30%" : "0")};
   z-index: 1;
 
   @media (max-width: 768px) {
-    width: ${({ $isSideNavOpen }) => ($isSideNavOpen ? '60%' : '0')};
+    width: ${({ $isSideNavOpen }) => ($isSideNavOpen ? "60%" : "0")};
   }
 `;
 
@@ -71,7 +71,7 @@ const SideNavHeaderSection = styled.div`
 `;
 
 const SideNavTitle = styled.div`
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   font-size: 3rem;
 
   @media (max-width: 768px) {
@@ -80,6 +80,7 @@ const SideNavTitle = styled.div`
 `;
 
 function SideNav({
+  activePresetId,
   activePreset,
   isSideNavOpen,
   setOctave,
@@ -106,28 +107,30 @@ function SideNav({
         <CloseButton icon={faTimes} onClick={() => toggleSidenav()} />
       </SideNavHeaderSection>
       <Dropdown
-        currentSelection={selection =>
+        currentSelection={(selection) =>
           selection === currentTheme ? true : false
         }
-        clickHandler={item => {
+        clickHandler={(item) => {
           changeTheme(item);
           toggleSidenav();
         }}
-        items={Object.keys(themeObj).map(th => th)}
+        items={Object.keys(themeObj).map((th) => th)}
         name=">> THEMES"
       />
 
       <Dropdown
-        currentSelection={selection =>
-          selection.name === activePreset ? true : false
+        currentSelection={(selection) =>
+          selection.id === activePresetId ? true : false
         }
-        clickHandler={preset => {
-          updateAllSynthEnvelopes(preset.synthesizer.envelope);
-          toggleOscillators(preset.synthesizer.oscillator.type);
-          setOctave(preset.octave.octave);
-          updateAllFilterEnvelopes(preset.filterParams);
+        clickHandler={(preset) => {
+          applyPreset(preset, {
+            updateAllSynthEnvelopes,
+            toggleOscillators,
+            setOctave,
+            updateAllFilterEnvelopes,
+            changePreset,
+          });
           toggleSidenav();
-          changePreset(preset.name);
         }}
         items={presets}
         name=">> PRESETS"
@@ -136,13 +139,14 @@ function SideNav({
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
+  activePresetId: state.preset.id,
   activePreset: state.preset.name,
   currentTheme: state.theme.name,
   isSideNavOpen: state.sideNav.isSideNavOpen,
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       setOctave,
@@ -159,7 +163,4 @@ const mapDispatchToProps = dispatch =>
     dispatch,
   );
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SideNav);
+export default connect(mapStateToProps, mapDispatchToProps)(SideNav);
