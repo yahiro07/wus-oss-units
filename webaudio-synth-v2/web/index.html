@@ -59,24 +59,24 @@
     window.flatMode =
       localStorage.getItem("wus_unit_synthesizer_v2_flat_view") === "1";
 
+    function updateViewModeButtons(flag) {
+      $("#btn-3d-view").toggleClass("active", !flag);
+      $("#btn-2d-view").toggleClass("active", flag);
+    }
+
+    function setFlatMode(flag) {
+      if (window.flatMode === flag) {
+        return;
+      }
+      localStorage.setItem("wus_unit_synthesizer_v2_flat_view", flag ? "1" : "0");
+      window.flatMode = flag;
+      updateViewModeButtons(flag);
+      if (typeof window.applySynthViewMode === "function") {
+        window.applySynthViewMode(flag);
+      }
+    }
+
     $(() => {
-      function updateViewModeButtons(flag) {
-        $("#btn-3d-view").toggleClass("active", !flag);
-        $("#btn-2d-view").toggleClass("active", flag);
-      }
-
-      function setFlatMode(flag) {
-        if (window.flatMode === flag) {
-          return;
-        }
-        localStorage.setItem("wus_unit_synthesizer_v2_flat_view", flag ? "1" : "0");
-        window.flatMode = flag;
-        updateViewModeButtons(flag);
-        if (typeof window.applySynthViewMode === "function") {
-          window.applySynthViewMode(flag);
-        }
-      }
-
       updateViewModeButtons(window.flatMode);
 
       if (window.hostInterface) {
