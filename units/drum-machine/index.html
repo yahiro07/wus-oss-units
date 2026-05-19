@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>drum-machine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>drum-machine</h1>
+    <button id="aboutBtn" class="link-btn" type="button">how the sounds are made</button>
+  </header>
+
+  <main>
+    <section class="transport">
+      <button id="playBtn" type="button">play</button>
+      <button id="clearBtn" type="button">clear</button>
+
+      <label class="bpm">
+        <span>bpm</span>
+        <input id="bpm" type="range" min="60" max="200" step="1" value="120">
+        <span id="bpmValue" class="bpm-value">120</span>
+      </label>
+
+      <div class="patterns">
+        <select id="patternSelect" aria-label="saved patterns">
+          <option value="">saved patterns</option>
+        </select>
+        <button id="loadBtn" type="button">load</button>
+        <button id="saveBtn" type="button">save</button>
+        <button id="deleteBtn" class="danger" type="button">delete</button>
+      </div>
+    </section>
+
+    <section id="grid" class="grid" aria-label="step grid"></section>
+
+    <section class="meters">
+      <label class="meter">
+        <span>master</span>
+        <input id="master" type="range" min="0" max="1" step="0.01" value="0.8">
+      </label>
+      <span id="stepReadout" class="step-readout">step 1 / 16</span>
+    </section>
+  </main>
+
+  <dialog id="aboutDialog">
+    <article>
+      <h2>how the sounds are made</h2>
+      <p>everything is synthesised live from the web audio api. no samples on disk.</p>
+      <ul>
+        <li><strong>kick</strong>: sine oscillator starting around 120hz, pitched down to 50hz over 80ms with a snappy
+          amplitude envelope.</li>
+        <li><strong>snare</strong>: white noise through a bandpass at 1.8khz, mixed with a short triangle body around
+          200hz.</li>
+        <li><strong>hihat closed</strong>: white noise highpassed at 7khz, 50ms decay.</li>
+        <li><strong>hihat open</strong>: same source as closed but with a 250ms decay so it rings into the next step.
+        </li>
+        <li><strong>clap</strong>: four bursts of bandpassed noise spaced a few ms apart, with a slightly longer tail to
+          fake a small room.</li>
+      </ul>
+      <p>the sequencer schedules ahead with an interval timer and lookahead window, so timing does not drift even if the
+        page is busy.</p>
+      <button id="closeAbout" type="button">close</button>
+    </article>
+  </dialog>
+
+  <script src="voices.js"></script>
+  <script src="scheduler.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
