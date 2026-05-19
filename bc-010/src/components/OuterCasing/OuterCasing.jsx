@@ -104,7 +104,7 @@ class OuterCasing extends Component<Props> {
     if (wrappedDestinationNode) {
       this.filter.connect(wrappedDestinationNode);
     } else {
-      this.filter.toMaster();
+      this.filter.toDestination();
     }
 
     if (!isEmpty(this.synth)) {
